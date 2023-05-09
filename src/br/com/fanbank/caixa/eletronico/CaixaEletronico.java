@@ -5,12 +5,14 @@ import br.com.fanbank.conta.TransferenciaDTO;
 
 import java.util.concurrent.ExecutionException;
 
-public class CaixaEletronico extends Conta{
+public class CaixaEletronico{
 
+    private Conta conta;
     private Double valorTotal;
 
-    public CaixaEletronico(Double valorTotal){
-        this.valorTotal = valorTotal;
+    public CaixaEletronico(Conta conta){
+        this.conta = conta;
+        this.valorTotal = conta.getSaldo();
     }
 
     public Double getValorTotal(){

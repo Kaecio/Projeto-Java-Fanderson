@@ -1,6 +1,7 @@
 package br.com.fanbank;
 
 import br.com.fanbank.caixa.eletronico.CaixaEletronico;
+import br.com.fanbank.conta.Conta;
 import br.com.fanbank.conta.ContaAuxilio;
 import br.com.fanbank.conta.ContaPF;
 import br.com.fanbank.conta.TransferenciaDTO;
@@ -17,6 +18,7 @@ public class Fanbank {
          * Criar novo tipo de conta
          */
         System.out.println("Iniciando Sistema");
+        ContaPJ contaItau = new
         CaixaEletronico caixaEletronico = new CaixaEletronico(10000.0);
         System.out.println("Valor total do caixa eletrônico: " + caixaEletronico.getValorTotal());
 
@@ -35,12 +37,13 @@ public class Fanbank {
         joaoDaSilva.setConta("12312-2");
         joaoDaSilva.setSaldo(4000.0);
 
+
         //transferencia
 
         TransferenciaDTO transferencia = new TransferenciaDTO();
         transferencia.setOrigem(joaoDaSilva);
         transferencia.setDestino(maria);
-        transferencia.setTipoTransferencia(TipoTransferencia.PIX);
+//        transferencia.setTipoTransferencia(TipoTransferencia.PIX);
         transferencia.setValor(500.0);
         transferencia.setData(LocalDateTime.now());
 
