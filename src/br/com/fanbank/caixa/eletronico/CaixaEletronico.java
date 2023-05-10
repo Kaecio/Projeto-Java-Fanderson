@@ -3,8 +3,6 @@ package br.com.fanbank.caixa.eletronico;
 import br.com.fanbank.conta.Conta;
 import br.com.fanbank.conta.TransferenciaDTO;
 
-import java.util.concurrent.ExecutionException;
-
 public class CaixaEletronico{
 
     private Conta conta;
