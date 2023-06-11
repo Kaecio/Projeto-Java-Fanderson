@@ -10,10 +10,6 @@ public class Fanbank {
 
     public static void main(String[] args) {
 
-        /**
-         * @// TODO: 15/03/2023
-         * Criar novo tipo de conta
-         */
         System.out.println("Iniciando Sistema");
 
         ContaPJ fanbank = new ContaPJ();
@@ -21,7 +17,7 @@ public class Fanbank {
         fanbank.setCnpj("1208931902");
         fanbank.setAgencia("1212");
         fanbank.setConta("1239-9");
-        fanbank.setSaldo(10000.0);
+        fanbank.setSaldo(100000.0);
 
         CaixaEletronico caixaEletronico = new CaixaEletronico(fanbank);
 
@@ -48,7 +44,7 @@ public class Fanbank {
         TransferenciaDTO transferencia = new TransferenciaDTO();
         transferencia.setOrigem(joaoDaSilva);
         transferencia.setDestino(maria);
-        //transferencia.setTipoTransferencia(TipoTransferencia.PIX);
+        transferencia.setTipoTransferencia(TipoTransferencia.TED);
         transferencia.setValor(500.0);
         transferencia.setData(LocalDateTime.now());
 

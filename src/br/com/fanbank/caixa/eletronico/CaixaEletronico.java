@@ -2,6 +2,9 @@ package br.com.fanbank.caixa.eletronico;
 
 import br.com.fanbank.conta.Conta;
 import br.com.fanbank.conta.TransferenciaDTO;
+import br.com.fanbank.enums.TipoTransferencia;
+
+import java.math.BigDecimal;
 
 public class CaixaEletronico{
 
@@ -25,22 +28,13 @@ public class CaixaEletronico{
             valorTotal -= valor;
             return valor;
         }else{
-            /**
-             * @// TODO: 15/03/2023
-             *
-             * Validar quando houver saque maior do que o valor disponível no caíxa eletrônico.
-             */
-            throw new Exception("Valor maior do que possui na conta.");
+            throw new Exception("Você não possui saldo suficiente. Valor maior do que possui na conta.");
         }
 
     }
 
-    /**
-     * @// TODO: 15/03/2023
-     * Validar depósito de dinheiro na conta
-     */
     public Double depositar(Double valor, Conta conta) throws Exception {
-        if (valor <= 0 ) throw new Exception("Deposito abaixo do permitido");
+        if (valor <= 0 ) throw new Exception("Deposito abaixo do permitido.");
         if (valor > 0){
             double valorDeposito = conta.getSaldo() + valor;
             conta.setSaldo(valorDeposito);
@@ -49,22 +43,38 @@ public class CaixaEletronico{
         return valor;
     }
 
-    /**
-     * @// TODO: 15/03/2023
-     * Implementar método para transferência entre contas
-     */
-    public Double transferir(TransferenciaDTO tranferencia) throws Exception {
-        Conta origem =  tranferencia.getOrigem();
-        Conta destina = tranferencia.getDestino();
-        double valor = tranferencia.getValor();
-        if (origem.getSaldo() < valor)throw new Exception("Valor da transferencia maior que o saldo atual");
+    public Double transferir(TransferenciaDTO transferencia) throws Exception {
 
-        origem.setSaldo(origem.getSaldo() - valor);
-        destina.setSaldo(destina.getSaldo() + valor);
+        Conta origem =  transferencia.getOrigem();
+        Conta destina = transferencia.getDestino();
+        double valor = transferencia.getValor();
+        if (origem.getSaldo() < valor)throw new Exception("Valor da transferencia maior que o saldo atual.");
+
+        if (transferencia.getTipoTransferencia() == TipoTransferencia.TED ){
+            origem.setSaldo(origem.getSaldo() - valor -3.00);
+            destina.setSaldo(destina.getSaldo() + valor);
+        }
+
+        if (transferencia.getTipoTransferencia() == TipoTransferencia.DOC ){
+            origem.setSaldo(origem.getSaldo() - valor - 10.00);
+            destina.setSaldo(destina.getSaldo() + valor);
+        }
+
+        if (transferencia.getTipoTransferencia() == TipoTransferencia.PIX ){
+            origem.setSaldo(origem.getSaldo() - valor - 0.00);
+            destina.setSaldo(destina.getSaldo() + valor);
+        }
+
+        if (transferencia.getTipoTransferencia() == TipoTransferencia.ENVELOPE ){
+            origem.setSaldo(origem.getSaldo() - valor - 1.00);
+            destina.setSaldo(destina.getSaldo() + valor);
+        }
+
+        if (transferencia.getTipoTransferencia() == TipoTransferencia.MALOTE ){
+            origem.setSaldo(origem.getSaldo() - valor - 5.00);
+            destina.setSaldo(destina.getSaldo() + valor);
+        }
+
         return valor;
-        /**
-         * @// TODO 13/04/2023
-         *
-          */
     }
 }
